@@ -1,31 +1,54 @@
+import React from 'react';
+import {
+  HashRouter as Router, Route, Switch, NavLink,
+} from 'react-router-dom';
+
 import './App.scss';
+import { TabsPage } from './TabsPage';
 
-/*
-import { RouteComponentProps } from 'react-router-dom';
-
-type TabsPageProps = React.FC<RouteComponentProps<{ tabId: string }>>;
-const TabsPage: TabsPageProps = ({ match }) => {...};
-
-or
-
-import { useParams } from 'react-router-dom';
-
-const TabsPage = () => {
-  const { tabId } = useParams<{ tabId: string }>();
-  ...
-};
-*/
-
-// const tabs = [
-//   { id: 'tab-1', title: 'Tab 1', content: 'Some text 1' },
-//   { id: 'tab-2', title: 'Tab 2', content: 'Some text 2' },
-//   { id: 'tab-3', title: 'Tab 3', content: 'Some text 3' },
-// ];
-
-const App = () => (
-  <div className="App">
-    <h1>Tabs with router</h1>
+const Home: React.FC = () => (
+  <div className="section">
+    <div className="container">
+      <h1 className="title">Home page</h1>
+    </div>
   </div>
+);
+
+const App: React.FC = () => (
+  <Router>
+    <div className="App">
+      <nav className="navbar is-dark mb-4">
+        <div className="container">
+          <div className="navbar-brand">
+            <div className="navbar-start">
+              <NavLink
+                exact
+                to="/"
+                className="navbar-item"
+                activeClassName="is-active"
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/tabs"
+                className="navbar-item"
+                activeClassName="is-active"
+              >
+                Tabs
+              </NavLink>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/tabs/:tabId?" component={TabsPage} />
+        </Switch>
+      </main>
+    </div>
+  </Router>
 );
 
 export default App;
