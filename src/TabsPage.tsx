@@ -1,11 +1,7 @@
 import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-export interface Tab {
-  id: string;
-  title: string;
-  content: string;
-}
+import { Tabs, Tab } from './Tabs';
 
 export const tabs: Tab[] = [
   { id: 'tab-1', title: 'Tab 1', content: 'Some text 1' },
@@ -21,20 +17,9 @@ export const TabsPage: React.FC = () => {
   return (
     <div className="section">
       <div className="container">
-        <nav className="tabs is-boxed is-medium mb-5">
-          <div className="tabs-list">
-            {tabs.map(tab => (
-              <NavLink
-                key={tab.id}
-                to={`/tabs/${tab.id}`}
-                className="tab-link"
-                activeClassName="is-active"
-              >
-                {tab.title}
-              </NavLink>
-            ))}
-          </div>
-        </nav>
+        <h1 className="title">Tabs page</h1>
+
+        <Tabs tabs={tabs} selectedTabId={tabId} />
 
         <div className="box has-background-white-ter p-5">
           {selectedTab ? (
